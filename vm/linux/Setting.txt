@@ -1,0 +1,61 @@
+------------------------------------------------
+
+# java alternatives
+# to override OpenJDK in Ubuntu
+
+1. Install sun/oracle jdk
+Download jdk-6u35-linux-x64.bin
+Install as root, to /usr/lib/jvm/
+
+sudo mv jdk1.6.0_35 /usr/lib/jvm
+
+2. update-alternatives
+sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.6.0_35/bin/java 1062 --slave /usr/share/man/man1/java.1.gz java.1.gz /usr/lib/jvm/jdk1.6.0_35/man/man1/java.1
+
+#sudo update-alternatives --install "/usr/lib/mozilla/plugins/libjavaplugin.so" "mozilla-javaplugin.so" "/usr/lib/jvm/jdk1.6.0_35/jre/lib/i386/libnpjp2.so" 1
+(optional for firefox)
+
+
+sudo update-alternatives --config java
+ (to select you version of java)
+
+3. java -version
+to verify it is you version
+
+
+------------------------------------------------
+
+Kernel Tunning (sysctl)
+1. Files
+   /etc/sysctl.conf
+   /etc/sysctl.d/README
+
+2. Temp chancge a parameter
+   sysctl -w vm.swappiness=0
+   echo 0 > /proc/sys/vm/swappiness
+
+3. Check a parameter
+   sysctl vm.swappiness
+   cat /proc/sys/vm/swappiness
+
+4. Let sysctl.conf come into effect
+   service procps start
+
+
+---------------------------------------------
+When apt / package issue like occurs:
+----
+Reading package lists... Error!
+E: Encountered a section with no Package: header
+E: Problem with MergeList /var/lib/apt/lists/security.ubuntu.com_ubuntu_dists_precise-security_multiverse_binary-i386_Packages
+E: The package lists or status file could not be parsed or opened.
+----
+1. # Remove the directory
+   sudo rm -fr /var/lib/apt/list
+
+2. # Recreate the necessary directory structure
+   sudo mkdir -p /var/lib/apt/list/partial
+
+3. # Update apt list
+   sudo apt-get update
+

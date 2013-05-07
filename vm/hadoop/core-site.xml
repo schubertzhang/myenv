@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+
+<!--- global properties -->
+
+<property>
+  <name>hadoop.data.dir</name>
+  <value>/data</value>
+  <description>A data base for other directories.</description>
+</property>
+
+
+<property>
+  <name>hadoop.tmp.dir</name>
+  <value>${hadoop.data.dir}/${user.name}/hadoop</value>
+  <description>A base for other temporary directories.</description>
+</property>
+
+
+<!--- logging properties -->
+
+<property>
+  <name>hadoop.logfile.count</name>
+  <value>3</value>
+  <description>The max number of log files</description>
+</property>
+
+
+<!-- i/o properties -->
+
+<property>
+  <name>io.file.buffer.size</name>
+  <value>4096</value>
+  <description>The size of buffer for use in sequence files.
+  The size of this buffer should probably be a multiple of hardware
+  page size (4096 on Intel x86), and it determines how much data is
+  buffered during read and write operations.</description>
+</property>
+
+
+
+<!-- file system properties -->
+
+<property>
+  <name>fs.default.name</name>
+  <value>hdfs://schubert-vm-mint1:9000</value>
+  <description>The name of the default file system.  A URI whose
+  scheme and authority determine the FileSystem implementation.  The
+  uri's scheme determines the config property (fs.SCHEME.impl) naming
+  the FileSystem implementation class.  The uri's authority is used to
+  determine the host, port, etc. for a filesystem.</description>
+</property>
+
+
+
+<!-- ipc properties -->
+
+<property>
+  <name>ipc.client.idlethreshold</name>
+  <value>1000</value>
+  <description>Defines the threshold number of connections after which
+               connections will be inspected for idleness.
+  </description>
+</property>
+
+<property>
+  <name>ipc.client.connection.maxidletime</name>
+  <value>20000</value>
+  <description>The maximum time in msec after which a client will bring down the connection to the server.
+  </description>
+</property>
+
+<property>
+  <name>ipc.server.listen.queue.size</name>
+  <value>64</value>
+  <description>Indicates the length of the listen queue for servers accepting
+               client connections.
+  </description>
+</property>
+
+
+<!-- Web Interface Configuration -->
+
+<property>
+  <name>webinterface.private.actions</name>
+  <value>true</value>
+  <description> If set to true, the web interfaces of JT and NN may contain
+                actions, such as kill job, delete file, etc., that should
+                not be exposed to public. Enable this option if the interfaces
+                are only reachable by those who have the right authorization.
+  </description>
+</property>
+
+
+
+<!-- Advanced -->
+
+
+<property>
+  <name>dfs.client.read.shortcircuit</name>
+  <value>true</value>
+  <description> enable/disable(default) direct reads </description>
+</property>
+
+<property>
+  <name>dfs.client.read.shortcircuit.skip.checksum</name>
+  <value>true</value>
+  <description> enable/disable(default) reads checksum </description>
+</property>
+
+
+</configuration>

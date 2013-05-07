@@ -1,0 +1,14 @@
+自己动手安装字体。
+具体办法：
+1、准备好雅黑字体,名字叫MSYH.TTF (可从Windows复制)
+2、将字体放入字体文件夹：
+（1）字体文件夹位于/usr/share/fonts，建立一个新文件夹，命名为msyh：sudo mkdir /usr/share/fonts/msyh
+（2）将雅黑字体放入上述文件夹内：sudo cp msyh.ttf /usr/share/fonts/msyh/
+（3）修改字体权限，确保root以外的普通用户也可以正常使用该字体：sudo chmod 755 /usr/share/fonts/msyh/*
+
+3、建立字体缓存。
+cd /usr/share/fonts/msyh/
+sudo mkfontscale && sudo mkfontdir && sudo fc-cache -fv
+
+4、重启X，设置系统字体。
+（1）系统字体设置：桌面右键->更改桌面背景>字体，按个人喜好将不同的地方改为“微软雅黑”。

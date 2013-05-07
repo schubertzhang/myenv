@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+
+<property>
+  <name>dfs.namenode.logging.level</name>
+  <value>info</value>
+  <description>The logging level for dfs namenode. Other values are "dir"(trac
+e namespace mutations), "block"(trace block under/over replications and block
+creations/deletions), or "all".</description>
+</property>
+
+<property>
+  <name>dfs.datanode.handler.count</name>
+  <value>3</value>
+  <description>The number of server threads for the datanode.</description>
+</property>
+
+
+<property>
+  <name>dfs.datanode.du.reserved</name>
+  <value>1073741824</value>
+  <description>Reserved space in bytes per volume. Always leave this much space free for non dfs use.
+  </description>
+</property>
+
+
+<property>
+  <name>dfs.web.ugi</name>
+  <value>schubert,schubert</value>
+  <description>The user account used by the web interface.
+    Syntax: USERNAME,GROUP1,GROUP2, ...
+  </description>
+</property>
+
+
+<property>
+  <name>dfs.permissions</name>
+  <value>false</value>
+  <description>
+    If "true", enable permission checking in HDFS.
+    If "false", permission checking is turned off,
+    but all other behavior is unchanged.
+    Switching from one parameter value to the other does not change the mode,
+    owner or group of files or directories.
+  </description>
+</property>
+
+<property>
+  <name>dfs.permissions.supergroup</name>
+  <value>schubert</value>
+  <description>The name of the group of super-users.</description>
+</property>
+
+<property>
+  <name>dfs.replication</name>
+  <value>1</value>
+  <description>Default block replication.
+  The actual number of replications can be specified when the file is created.
+  The default is used if replication is not specified in create time.
+  </description>
+</property>
+
+<property>
+  <name>dfs.replication.max</name>
+  <value>5</value>
+  <description>Maximal block replication.
+  </description>
+</property>
+
+<property>
+  <name>dfs.replication.min</name>
+  <value>1</value>
+  <description>Minimal block replication.
+  </description>
+</property>
+
+<property>
+  <name>dfs.block.size</name>
+  <value>16777216</value>
+  <description>The default block size for new files.</description>
+</property>
+
+<property>
+  <name>dfs.namenode.handler.count</name>
+  <value>4</value>
+  <description>The number of server threads for the namenode. Python formula: python -c 'import math ; print int(math.log(200) * 20)'</description>
+</property>
+
+
+<property>
+  <name>dfs.safemode.threshold.pct</name>
+  <value>0.99f</value>
+  <description>
+    Specifies the percentage of blocks that should satisfy
+    the minimal replication requirement defined by dfs.replication.min.
+    Values less than or equal to 0 mean not to wait for any particular
+    percentage of blocks before exiting safemode.
+    Values greater than 1 will make safe mode permanent.
+  </description>
+</property>
+
+
+<property>
+  <name>dfs.safemode.extension</name>
+  <value>10000</value>
+  <description>
+    Determines extension of safe mode in milliseconds
+    after the threshold level is reached.
+  </description>
+</property>
+
+<property>
+  <name>dfs.balance.bandwidthPerSec</name>
+  <value>1048576</value>
+  <description>
+        Specifies the maximum amount of bandwidth that each datanode
+        can utilize for the balancing purpose in term of
+        the number of bytes per second.
+  </description>
+</property>
+
+
+<property>
+  <name>dfs.datanode.data.dir.perm</name>
+  <value>755</value>
+  <description>Permissions for the directories on on the local filesystem where
+  the DFS data node store its blocks. The permissions can either be octal or
+  symbolic.</description>
+</property>
+
+<property>
+  <name>dfs.block.local-path-access.user</name>
+  <value>schubert</value>
+</property>
+
+
+<property>
+  <name>dfs.datanode.failed.volumes.tolerated</name>
+  <value>0</value>
+  <description>The number of volumes that are allowed to
+  fail before a datanode stops offering service. By default
+  any volume failure will cause a datanode to shutdown.
+  </description>
+</property>
+
+
+<property>
+  <name>dfs.webhdfs.enabled</name>
+  <value>true</value>
+</property>
+
+</configuration>

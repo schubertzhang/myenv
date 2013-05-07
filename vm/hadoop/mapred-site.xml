@@ -1,0 +1,205 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+
+<property>
+  <name>mapred.job.tracker</name>
+  <value>schubert-vm-mint1:9100</value>
+  <description>The host and port that the MapReduce job tracker runs
+  at.  If "local", then jobs are run in-process as a single map
+  and reduce task.
+  </description>
+</property>
+
+<property>
+  <name>mapred.job.tracker.handler.count</name>
+  <value>3</value>
+  <description>
+    The number of server threads for the JobTracker. This should be roughly
+    4% of the number of tasktracker nodes.
+  </description>
+</property>
+
+<property>
+  <name>mapred.system.dir</name>
+  <value>/mapred/system</value>
+  <description>HDFS: The directory where MapReduce stores control files.
+  </description>
+</property>
+
+<property>
+  <name>mapreduce.jobtracker.staging.root.dir</name>
+  <value>/mapred/staging</value>
+  <description>HDFS: The root of the staging area for users' job files
+  In practice, this should be the directory where users' home
+  directories are located (usually /user)
+  </description>
+</property>
+
+<property>
+  <name>mapred.temp.dir</name>
+  <value>/mapred/temp</value>
+  <description>HDFS: A shared directory for temporary files.
+  </description>
+</property>
+
+<property>
+  <name>mapred.map.tasks</name>
+  <value>2</value>
+  <description>The default number of map tasks per job.
+  Ignored when mapred.job.tracker is "local".
+  </description>
+</property>
+
+<property>
+  <name>mapred.reduce.tasks</name>
+  <value>1</value>
+  <description>The default number of reduce tasks per job. Typically set to 99%
+  of the cluster's reduce capacity, so that if a node fails the reduces can
+  still be executed in a single wave.
+  Ignored when mapred.job.tracker is "local".
+  </description>
+</property>
+
+<property>
+  <name>mapreduce.tasktracker.outofband.heartbeat</name>
+  <value>true</value>
+  <description>Expert: Set this to true to let the tasktracker send an
+  out-of-band heartbeat on task-completion for better latency.
+  </description>
+</property>
+
+<property>
+  <name>mapred.tasktracker.map.tasks.maximum</name>
+  <value>2</value>
+  <description>The maximum number of map tasks that will be run
+  simultaneously by a task tracker.
+  </description>
+</property>
+
+<property>
+  <name>mapred.tasktracker.reduce.tasks.maximum</name>
+  <value>2</value>
+  <description>The maximum number of reduce tasks that will be run
+  simultaneously by a task tracker.
+  </description>
+</property>
+
+<property>
+  <name>mapred.jobtracker.completeuserjobs.maximum</name>
+  <value>10</value>
+  <description>The maximum number of complete jobs per user to keep around
+  before delegating them to the job history.</description>
+</property>
+
+
+<property>
+  <name>mapred.child.java.opts</name>
+  <value>-Xmx400m</value>
+  <description>Java opts for the task tracker child processes.
+  The following symbol, if present, will be interpolated: @taskid@ is replaced
+  by current TaskID. Any other occurrences of '@' will go unchanged.
+  For example, to enable verbose gc logging to a file named for the taskid in
+  /tmp and to set the heap maximum to be a gigabyte, pass a 'value' of:
+        -Xmx1024m -verbose:gc -Xloggc:/tmp/@taskid@.gc
+
+  The configuration variable mapred.child.ulimit can be used to control the
+  maximum virtual memory of the child processes.
+  </description>
+</property>
+
+<property>
+  <name>mapred.map.child.java.opts</name>
+  <value>-Xmx400m</value>
+  <description>
+  </description>
+</property>
+
+
+<property>
+  <name>mapred.reduce.child.java.opts</name>
+  <value>-Xmx400m</value>
+  <description>
+  </description>
+</property>
+
+
+<property>
+  <name>mapred.job.reduce.input.buffer.percent</name>
+  <value>0.1</value>
+  <description>The percentage of memory- relative to the maximum heap size- to
+  retain map outputs during the reduce. When the shuffle is concluded, any
+  remaining map outputs in memory must consume less than this threshold before
+  the reduce can begin.
+  </description>
+</property>
+
+<property>
+  <name>mapred.map.tasks.speculative.execution</name>
+  <value>true</value>
+  <description>If true, then multiple instances of some map tasks
+               may be executed in parallel.</description>
+</property>
+
+<property>
+  <name>mapred.reduce.tasks.speculative.execution</name>
+  <value>true</value>
+  <description>If true, then multiple instances of some reduce tasks
+               may be executed in parallel.</description>
+</property>
+	
+<property>
+  <name>mapred.job.reuse.jvm.num.tasks</name>
+  <value>-1</value>
+  <description>How many tasks to run per jvm. If set to -1, there is
+  no limit.
+  </description>
+</property>
+
+
+<property>
+  <name>mapred.submit.replication</name>
+  <value>1</value>
+  <description>The replication level for submitted job files.  This
+  should be around the square root of the number of nodes.
+  </description>
+</property>
+
+<property>
+  <name>tasktracker.http.threads</name>
+  <value>10</value>
+  <description>The number of worker threads that for the http server. This is
+               used for map output fetching
+  </description>
+</property>
+
+<property>
+  <name>mapred.compress.map.output</name>
+  <value>true</value>
+  <description>Should the outputs of the maps be compressed before being
+               sent across the network. Uses SequenceFile compression.
+  </description>
+</property>
+
+<property>
+  <name>mapred.map.output.compression.codec</name>
+  <value>org.apache.hadoop.io.compress.SnappyCodec</value>
+  <description>If the map outputs are compressed, how should they be
+               compressed?
+  </description>
+</property>
+
+
+<property>
+  <name>mapred.reduce.slowstart.completed.maps</name>
+  <value>0.3</value>
+  <description>Fraction of the number of maps in the job which should be
+  complete before reduces are scheduled for the job.
+  </description>
+</property>
+
+
+</configuration>
