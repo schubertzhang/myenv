@@ -50,7 +50,7 @@
   <name>mapred.map.tasks</name>
   <value>2</value>
   <description>The default number of map tasks per job.
-  Ignored when mapred.job.tracker is "local".
+  Ignored when mapred.job.tracker is "local".  
   </description>
 </property>
 
@@ -58,7 +58,7 @@
   <name>mapred.reduce.tasks</name>
   <value>1</value>
   <description>The default number of reduce tasks per job. Typically set to 99%
-  of the cluster's reduce capacity, so that if a node fails the reduces can
+  of the cluster's reduce capacity, so that if a node fails the reduces can 
   still be executed in a single wave.
   Ignored when mapred.job.tracker is "local".
   </description>

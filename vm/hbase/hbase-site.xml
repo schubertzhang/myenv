@@ -26,6 +26,7 @@
   <property>
     <name>hbase.rootdir</name>
     <value>file:///data/${user.name}/hbase</value>
+    <!--value>hdfs://schubert-vm-mint1:9000/hbase</value-->
     <description>The directory shared by region servers and into
     which HBase persists.  The URL should be 'fully-qualified'
     to include the filesystem scheme.  For example, to specify the
@@ -101,6 +102,16 @@
   </property>
 
   <property>
+    <name>hbase.regionserver.regionSplitLimit</name>
+    <value>2147483647</value>
+    <description>Limit for the number of regions after which no more region
+    splitting should take place. This is not a hard limit for the number of
+    regions but acts as a guideline for the regionserver to stop splitting after
+    a certain limit. Default is set to MAX_INT; i.e. do not block splitting.
+    </description>
+  </property>
+
+  <property>
     <name>hbase.balancer.period</name>
     <value>300000</value>
     <description>Period at which the region balancer runs in the Master.
@@ -132,6 +143,15 @@
       This value equal to hbase.regionserver.global.memstore.upperLimit causes
       the minimum possible flushing to occur when updates are blocked due to
       memstore limiting.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.regionserver.optionalcacheflushinterval</name>
+    <value>3600000</value>
+    <description>
+    Maximum amount of time an edit lives in memory before being automatically flushed.
+    Default 1 hour. Set it to 0 to disable automatic flushing.
     </description>
   </property>
 

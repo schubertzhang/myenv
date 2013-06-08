@@ -26,7 +26,6 @@ fi
 export HADOOP_HEAPSIZE=600
 
 # Extra Java runtime options.  Empty by default.
-# if [ "$HADOOP_OPTS" == "" ]; then export HADOOP_OPTS=-server; else HADOOP_OPTS+=" -server"; fi
 TMP_JVM_OPTS="-XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:+UseCompressedOops"
 if [ "$HADOOP_OPTS" == "" ]; then export HADOOP_OPTS="-server $TMP_JVM_OPTS"; else HADOOP_OPTS+=" -server $TMP_JVM_OPTS"; fi
 
@@ -59,9 +58,6 @@ export HADOOP_JOBTRACKER_OPTS="-Dcom.sun.management.jmxremote $HADOOP_JOBTRACKER
 # export HADOOP_SLAVE_SLEEP=0.1
 
 # The directory where pid files are stored. /tmp by default.
-# NOTE: this should be set to a directory that can only be written to by 
-#       the users that are going to run the hadoop daemons.  Otherwise there is
-#       the potential for a symlink attack.
 export HADOOP_PID_DIR=${HADOOP_PREFIX}/pids
 
 # A string representing this instance of hadoop. $USER by default.

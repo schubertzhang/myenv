@@ -95,7 +95,7 @@ creations/deletions), or "all".</description>
   <name>dfs.safemode.threshold.pct</name>
   <value>0.99f</value>
   <description>
-    Specifies the percentage of blocks that should satisfy
+    Specifies the percentage of blocks that should satisfy 
     the minimal replication requirement defined by dfs.replication.min.
     Values less than or equal to 0 mean not to wait for any particular
     percentage of blocks before exiting safemode.
@@ -108,7 +108,7 @@ creations/deletions), or "all".</description>
   <name>dfs.safemode.extension</name>
   <value>10000</value>
   <description>
-    Determines extension of safe mode in milliseconds
+    Determines extension of safe mode in milliseconds 
     after the threshold level is reached.
   </description>
 </property>
