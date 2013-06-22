@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+
+<property>
+  <name>hive.cli.print.header</name>
+  <value>true</value>
+  <description>Whether to print the names of the columns in query output.</description>
+</property>
+
+<property>
+  <name>hive.cli.print.current.db</name>
+  <value>false</value>
+  <description>Whether to include the current database in the hive prompt.</description>
+</property>
+
+<property>
+  <name>hive.cli.prompt</name>
+  <value>hive</value>
+  <description>Command line prompt configuration value. Other hiveconf can be used in
+        this configuration value. Variable substitution will only be invoked at the hive
+        cli startup.</description>
+</property>
+
+<property>
+  <name>hive.cli.pretty.output.num.cols</name>
+  <value>-1</value>
+  <description>The number of columns to use when formatting output generated
+        by the DESCRIBE PRETTY table_name command.  If the value of this property
+        is -1, then hive will use the auto-detected terminal width.</description>
+</property>
+
+<property>
+  <name>javax.jdo.option.ConnectionURL</name>
+  <value>jdbc:mysql://localhost/hive?createDatabaseIfNotExist=true</value>
+  <description>JDBC connect string for a JDBC metastore</description>
+</property>
+
+<property>
+  <name>javax.jdo.option.ConnectionDriverName</name>
+  <value>com.mysql.jdbc.Driver</value>
+  <description>Driver class name for a JDBC metastore</description>
+</property>
+
+<property>
+  <name>javax.jdo.option.ConnectionUserName</name>
+  <value>hive</value>
+  <description>username to use against metastore database</description>
+</property>
+
+<property>
+  <name>javax.jdo.option.ConnectionPassword</name>
+  <value>hive</value>
+  <description>password to use against metastore database</description>
+</property>
+
+<property>
+  <name>hive.metastore.warehouse.dir</name>
+  <value>/hive</value>
+  <description>location of default database for the warehouse</description>
+</property>
+
+
+
+</configuration>
+
