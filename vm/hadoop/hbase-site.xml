@@ -1,0 +1,307 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+/**
+ * Copyright 2010 The Apache Software Foundation
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<configuration>
+
+  <property>
+    <name>hbase.rootdir</name>
+    <value>file:///data/${user.name}/hbase</value>
+    <!--value>hdfs://schubert-vm-mint1:9000/hbase</value-->
+    <description>The directory shared by region servers and into
+    which HBase persists.  The URL should be 'fully-qualified'
+    to include the filesystem scheme.  For example, to specify the
+    HDFS directory '/hbase' where the HDFS instance's namenode is
+    running at namenode.example.org on port 9000, set this value to:
+    hdfs://namenode.example.org:9000/hbase.  By default HBase writes
+    into /tmp.  Change this configuration else all data will be lost
+    on machine restart.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.cluster.distributed</name>
+    <value>true</value>
+    <description>The mode the cluster will be in. Possible values are
+      false for standalone mode and true for distributed mode.  If
+      false, startup will run all HBase and ZooKeeper daemons together
+      in the one JVM.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.tmp.dir</name>
+    <value>/data/${user.name}/hbase/tmp</value>
+    <description>Temporary directory on the local filesystem.
+    Change this setting to point to a location more permanent
+    than '/tmp' (The '/tmp' directory is often cleared on
+    machine restart).
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.client.write.buffer</name>
+    <value>2097152</value>
+    <description>Default size of the HTable clien write buffer in bytes.
+    A bigger buffer takes more memory -- on both the client and server
+    side since server instantiates the passed write buffer to process
+    it -- but a larger buffer size reduces the number of RPCs made.
+    For an estimate of server-side memory-used, evaluate
+    hbase.client.write.buffer * hbase.regionserver.handler.count
+    </description>
+  </property>
+	
+  <property>
+    <name>hbase.client.scanner.caching</name>
+    <value>100</value>
+    <description>Number of rows that will be fetched when calling next
+    on a scanner if it is not served from (local, client) memory. Higher
+    caching values will enable faster scanners but will eat up more memory
+    and some calls of next may take longer and longer times when the cache is empty.
+    Do not set this value such that the time between invocations is greater
+    than the scanner timeout; i.e. hbase.regionserver.lease.period
+    </description>
+  </property>
+
+
+  <property>
+    <name>hbase.regionserver.handler.count</name>
+    <value>10</value>
+    <description>Count of RPC Listener instances spun up on RegionServers.
+    Same property is used by the Master for count of master handlers.
+    Default is 10.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.regionserver.optionallogflushinterval</name>
+    <value>1000</value>
+    <description>Sync the HLog to the HDFS after this interval if it has not
+    accumulated enough entries to trigger a sync. Default 1 second. Units:
+    milliseconds.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.regionserver.regionSplitLimit</name>
+    <value>2147483647</value>
+    <description>Limit for the number of regions after which no more region
+    splitting should take place. This is not a hard limit for the number of
+    regions but acts as a guideline for the regionserver to stop splitting after
+    a certain limit. Default is set to MAX_INT; i.e. do not block splitting.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.balancer.period</name>
+    <value>300000</value>
+    <description>Period at which the region balancer runs in the Master.
+    </description>
+  </property>
+
+
+  <property>
+    <name>hbase.regions.slop</name>
+    <value>0.2</value>
+    <description>Rebalance if any regionserver has average + (average * slop) regions.
+    Default is 20% slop.
+    </description>
+  </property>
+
+ <property>
+    <name>hbase.regionserver.global.memstore.upperLimit</name>
+    <value>0.4</value>
+    <description>Maximum size of all memstores in a region server before new
+      updates are blocked and flushes are forced. Defaults to 40% of heap
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.regionserver.global.memstore.lowerLimit</name>
+    <value>0.35</value>
+    <description>When memstores are being forced to flush to make room in
+      memory, keep flushing until we hit this mark. Defaults to 35% of heap.
+      This value equal to hbase.regionserver.global.memstore.upperLimit causes
+      the minimum possible flushing to occur when updates are blocked due to
+      memstore limiting.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.regionserver.optionalcacheflushinterval</name>
+    <value>3600000</value>
+    <description>
+    Maximum amount of time an edit lives in memory before being automatically flushed.
+    Default 1 hour. Set it to 0 to disable automatic flushing.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.hregion.memstore.flush.size</name>
+    <value>16777216</value>
+    <description>
+    Memstore will be flushed to disk if size of the memstore
+    exceeds this number of bytes.  Value is checked by a thread that runs
+    every hbase.server.thread.wakefrequency.
+    </description>
+  </property>
+
+
+  <property>
+    <name>hbase.hregion.max.filesize</name>
+    <value>1073741824</value>
+    <description>
+    Maximum HStoreFile size. If any one of a column families' HStoreFiles has
+    grown to exceed this value, the hosting HRegion is split in two.
+    Default: 10G.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.hstore.compactionThreshold</name>
+    <value>3</value>
+    <description>
+    If more than this number of HStoreFiles in any one HStore
+    (one HStoreFile is written per flush of memstore) then a compaction
+    is run to rewrite all HStoreFiles files as one.  Larger numbers
+    put off compaction but when it runs, it takes longer to complete.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.hstore.blockingStoreFiles</name>
+    <value>7</value>
+    <description>
+    If more than this number of StoreFiles in any one Store
+    (one StoreFile is written per flush of MemStore) then updates are
+    blocked for this HRegion until a compaction is completed, or
+    until hbase.hstore.blockingWaitTime has been exceeded.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.hstore.blockingWaitTime</name>
+    <value>60000</value>
+    <description>
+    The time an HRegion will block updates for after hitting the StoreFile
+    limit defined by hbase.hstore.blockingStoreFiles.
+    After this time has elapsed, the HRegion will stop blocking updates even
+    if a compaction has not been completed.  Default: 90 seconds.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.hstore.compaction.max</name>
+    <value>10</value>
+    <description>Max number of HStoreFiles to compact per 'minor' compaction.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.hregion.majorcompaction</name>
+    <value>86400000</value>
+    <description>The time (in miliseconds) between 'major' compactions of all
+    HStoreFiles in a region.  Default: 1 day.
+    Set to 0 to disable automated major compactions.
+    </description>
+  </property>
+
+  <property>
+    <name>hfile.block.cache.size</name>
+    <value>0.01</value>
+    <description>
+        Percentage of maximum heap (-Xmx setting) to allocate to block cache
+        used by HFile/StoreFile. Default of 0.25 means allocate 25%.
+        Set to 0 to disable but it's not recommended.
+    </description>
+  </property>
+
+  <property>
+      <name>hfile.block.index.cacheonwrite</name>
+      <value>false</value>
+      <description>
+          This allows to put non-root multi-level index blocks into the block
+          cache at the time the index is being written.
+      </description>
+  </property>
+
+  <property>
+      <name>hfile.index.block.max.size</name>
+      <value>131072</value>
+      <description>
+          When the size of a leaf-level, intermediate-level, or root-level
+          index block in a multi-level block index grows to this size, the
+          block is written out and a new block is started.
+      </description> 
+  </property>
+
+  <property>
+      <name>io.storefile.bloom.block.size</name>
+      <value>131072</value>
+      <description>
+          The size in bytes of a single block ("chunk") of a compound Bloom
+          filter. This size is approximate, because Bloom blocks can only be
+          inserted at data block boundaries, and the number of keys per data
+          block varies.
+      </description>
+  </property>
+
+  <property>
+      <name>io.storefile.bloom.cacheonwrite</name>
+      <value>false</value>
+      <description>
+          Enables cache-on-write for inline blocks of a compound Bloom filter.
+      </description>
+  </property>
+
+  <property>
+    <name>hbase.zookeeper.quorum</name>
+    <value>schubert-vm-mint1</value>
+    <description>Comma separated list of servers in the ZooKeeper Quorum.
+    For example, "host1.mydomain.com,host2.mydomain.com,host3.mydomain.com".
+    By default this is set to localhost for local and pseudo-distributed modes
+    of operation. For a fully-distributed setup, this should be set to a full
+    list of ZooKeeper quorum servers. If HBASE_MANAGES_ZK is set in hbase-env.sh
+    this is the list of servers which we will start/stop ZooKeeper on.
+    </description>
+  </property>
+
+ <property>
+    <name>zookeeper.session.timeout</name>
+    <value>180000</value>
+    <description>ZooKeeper session timeout.
+      HBase passes this to the zk quorum as suggested maximum time for a
+      session (This setting becomes zookeeper's 'maxSessionTimeout').  See
+      http://hadoop.apache.org/zookeeper/docs/current/zookeeperProgrammers.html#ch_zkSessions
+      "The client sends a requested timeout, the server responds with the
+      timeout that it can give the client. " In milliseconds.
+    </description>
+  </property>
+
+
+
+  <!--property> 
+    <name>hbase.replication</name> 
+    <value>true</value> 
+  </property-->
+
+</configuration>
