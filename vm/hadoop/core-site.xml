@@ -112,5 +112,14 @@
   <description> enable/disable(default) reads checksum </description>
 </property>
 
+<property>
+  <name>fs.inmemory.size.mb</name>
+  <value>100</value>
+  <description>Larger amount of memory allocated for the in-memory
+   file-system used to merge map-outputs at the reduces.
+  </description>
+</property>
+
+
 
 </configuration>

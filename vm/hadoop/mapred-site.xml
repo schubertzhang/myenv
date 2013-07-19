@@ -6,6 +6,16 @@
 <configuration>
 
 <property>
+  <name>hadoop.job.history.user.location</name>
+  <value>none</value>
+  <description> User can specify a location to store the history files of 
+  a particular job. If nothing is specified, the logs are stored in 
+  output directory. The files are stored in "_logs/history/" in the directory.
+  User can stop logging by giving the value "none". 
+  </description>
+</property>
+
+<property>
   <name>mapred.job.tracker</name>
   <value>schubert-vm-mint1:9100</value>
   <description>The host and port that the MapReduce job tracker runs
@@ -186,7 +196,7 @@
 
 <property>
   <name>mapred.map.output.compression.codec</name>
-  <value>org.apache.hadoop.io.compress.SnappyCodec</value>
+  <value>org.apache.hadoop.io.compress.DefaultCodec</value>
   <description>If the map outputs are compressed, how should they be
                compressed?
   </description>
@@ -201,5 +211,11 @@
   </description>
 </property>
 
+<property>
+  <name>mapreduce.fileoutputcommitter.marksuccessfuljobs</name>
+  <value>true</value>
+  <description>See FileOutputCommitter
+  </description>
+</property>
 
 </configuration>
